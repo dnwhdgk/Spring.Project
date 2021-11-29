@@ -21,6 +21,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 파일 업로드 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 파일 사이즈 제한 (byte 단위) -->
+		<beans:property name="maxUploadSize" value="10000000" />
+	</beans:bean>
+	
 	<context:component-scan base-package="com.bbs.controller" />
 	
 	

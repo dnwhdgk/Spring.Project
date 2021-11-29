@@ -155,13 +155,13 @@ $(document).ready(function () {
 		var user_name   = $('#user_name').val();
 		var user_gender = $('#user_gender').val();
 		var user_email  = $('#user_email').val();
-		var user_addr1  = $('#user_addr1').val();
-		var user_addr2  = $('#user_addr2').val();
-		var user_addr3  = $('#user_addr3').val();
+		var addr1  = $('#addr1').val();
+		var addr2  = $('#addr2').val();
+		var addr3  = $('#addr3').val();
 		
 		if(user_id == "" || user_pw == "" || user_pw2 == "" ||
 				user_name == "" || user_gender == "" || user_email == "" ||
-				user_addr1 == "" || user_addr2 == "" || user_addr3 == "") {
+				addr1 == "" || addr2 == "" || addr3 == "") {
 			alert('모든 값을 입력하세요.');
 			event.preventDefault();
 			return;

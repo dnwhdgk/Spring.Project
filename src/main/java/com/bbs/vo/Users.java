@@ -1,5 +1,5 @@
 package com.bbs.vo;
-
+// Users Bean
 public class Users {
 
 	private String user_id;
