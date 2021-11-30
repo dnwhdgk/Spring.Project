@@ -3,7 +3,7 @@ package com.bbs.vo;
 public class Boarder {
 
 	private int boarder_id;
-	private String wirter;
+	private String writer;
 	private String title;
 	private String contents;
 	private String reg_date;
@@ -12,9 +12,9 @@ public class Boarder {
 	
 	public Boarder() {}
 
-	public Boarder(int boarder_id, String wirter, String title, String contents, String reg_date, int likey, int available) {
+	public Boarder(int boarder_id, String writer, String title, String contents, String reg_date, int likey, int available) {
 		this.boarder_id = boarder_id;
-		this.wirter = wirter;
+		this.writer = writer;
 		this.title = title;
 		this.contents = contents;
 		this.reg_date = reg_date;
@@ -30,12 +30,12 @@ public class Boarder {
 		this.boarder_id = boarder_id;
 	}
 
-	public String getWirter() {
-		return wirter;
+	public String getWriter() {
+		return writer;
 	}
 
-	public void setWirter(String wirter) {
-		this.wirter = wirter;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public String getTitle() {

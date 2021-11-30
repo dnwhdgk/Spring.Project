@@ -1,5 +1,7 @@
 package com.bbs.controller;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -40,20 +42,38 @@ public class Bbscontroller {
 		
 	}
 	
+	// url 패턴이 'path/bbs/view' 일 경우
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String view(Integer boarder_id, Model model, RedirectAttributes ra) throws Exception {
+		
+		HashMap<String, Object> map = bbsService.view(boarder_id);
+		
+		if(map.get("boarder") == null) {
+			ra.addFlashAttribute("msg", "존재하지 않는 게시물입니다.");
+			return "redirect:/bbs";
+		}
+		
+		model.addAttribute("map", map);
+		
+		return "bbs/view";
+		
+	}
+	
 	// url 패턴이 'path/bbs/writeAction' 일 경우
 	@RequestMapping(value = "/writeAction", method = RequestMethod.POST)
-	public String writeAction(Boarder boarder, MultipartFile file, HttpSession session) throws Exception {
+	public String writeAction(Boarder boarder, MultipartFile file, HttpSession session, RedirectAttributes ra) throws Exception {
 		
 		String user_id = (String) session.getAttribute("user_id");
 		
 		if(user_id == null) {
-			
+			ra.addFlashAttribute("msg", "로그인이 필요합니다.");
+			return "redirect:/login";
 		}
 		
-		boarder.setWirter(user_id);
+		boarder.setWriter(user_id);
 		bbsService.writeAction(boarder, file);
 		
-		return "redirect:/bbs/write";
+		return "redirect:/bbs";
 	}
 	
 	

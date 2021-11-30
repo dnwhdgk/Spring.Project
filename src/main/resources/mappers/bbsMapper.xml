@@ -54,4 +54,41 @@
 		AND    user_pw = #{user_pw}
 	</select>
 	
+	<!-- 게시물 쓰기 SQL -->
+	<insert id="write">
+		INSERT INTO BOARDER(writer, title, contents, reg_date, likey, available)
+		VALUES (#{writer}, #{title}, #{contents}, now(), 0, 0)
+		<selectKey keyProperty="boarder_id" resultType="_int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 파일 업로드 SQL --> 
+	<insert id="fileUpload">
+		INSERT INTO UPLOADFILE(boarder_id, file_name, file_realName, count)
+		VALUES (#{boarder_id}, #{file_name}, #{file_realName}, 0)
+	</insert>
+	
+	<!-- 게시물 불러오기 SQL (id : getBoarder -->
+	<select id="getBoarder" parameterType = "int" resultType="Boarder">
+		SELECT *
+		FROM   BOARDER
+		WHERE  boarder_id = #{boarder_id}
+		AND	   available = 0
+	</select>
+	
+	<!-- 첨부파일 불러오기 SQL (id : getUploadFile, 조건 : boarder_id ?) -->
+	<select id="getUploadFile" resultType="UploadFile">
+		SELECT *
+		FROM   UPLOADFILE
+		WHERE  boarder_id = #{boarder_id}
+	</select>
+	
+	<!-- 첨부파일 불러오기 SQL (id : getUploadFileReal, 조건 : file_realName ?) -->
+	<select id="getUploadFileReal" resultType="UploadFile">
+		SELECT *
+		FROM   UPLOADFILE
+		WHERE  file_realName = #{file_realName}
+	</select>
+	
 </mapper>

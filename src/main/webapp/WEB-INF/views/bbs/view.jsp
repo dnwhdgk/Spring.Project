@@ -39,26 +39,32 @@
 						<!-- '<'  ->  &lt;   : 문자열.replaceAll("<", "&lt;")    -->
 						<!-- '>'  ->  &gt;   : 문자열.replaceAll(">", "&gt;")    -->
 						<!-- '\n' ->  '<br>' : 문자열.replaceAll("\n", "<br>")   -->
-						<td>${boarder.title }</td>
+						<td>${map.boarder.title }</td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td>${boarder.writer }</td>
+						<td>${map.boarder.writer }</td>
 					</tr>
 					<tr>
 						<td>작성일</td>
-						<td>${boarder.reg_date }</td>
+						<td>${map.boarder.reg_date }</td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td style="min-height: 200px; text-align: left;">${boarder.contents }</td>
+						<td style="min-height: 200px; text-align: left;">${map.boarder.contents }</td>
 					</tr>
+					<c:if test="${not empty map.uploadFile}">
+					<tr>
+						<td>첨부파일</td>
+						<td><a href="#">${map.uploadFile.file_name }</a></td>
+					</tr>
+					</c:if>
 				</tbody>
 			</table>
 			<a href="../bbs" class="btn btn-default">목록</a>
-			<c:if test="${user_id eq boarder.writer }">
-			<a href="./update?boarder_id=${boarder.boarder_id }" class="btn btn-success">수정</a>
-			<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./deleteAction?boarder_id=${boarder.boarder_id }" class="btn btn-danger">삭제</a>
+			<c:if test="${user_id eq map.boarder.writer }">
+			<a href="./update?boarder_id=${map.boarder.boarder_id }" class="btn btn-success">수정</a>
+			<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="./deleteAction?boarder_id=${map.boarder.boarder_id }" class="btn btn-danger">삭제</a>
 			</c:if>
 		</form>
 	</div>
