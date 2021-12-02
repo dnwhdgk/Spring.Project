@@ -2,9 +2,6 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- JSTL과 EL을 이용해서 Session에 있는 user_id 값을 가져와 user_id에 저장 -->
-<c:set var="user_id" value="${sessionScope.user_id }" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +42,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="boarder" items="${list }">
+				<c:forEach var="boarder" items="${map.list }">
 				<tr>
 					<td>${boarder.boarder_id }</td>
 					<td><a href="${path}/bbs/view?boarder_id=${boarder.boarder_id}">${boarder.title }</a></td>
@@ -59,26 +56,26 @@
 		<%-- GET 방식 전송 : URL?파라미터=데이터&파라미터=데이터 --%>
 		<ul class="pagination">
 		
-			<c:if test="${paging.pageNumber > 5 }">
+			<c:if test="${map.paging.pageNumber > 5 }">
 			
-			<li><a href="./bbs?pageNum=${paging.before }"><span class="glyphicon glyphicon-triangle-left"></span></a></li>
+			<li><a href="./bbs?pageNumber=${map.paging.before }"><span class="glyphicon glyphicon-triangle-left"></span></a></li>
 			
 			</c:if>
 			
-			<c:forEach var="i" begin="${paging.minPage }" end="${paging.maxPage }">
+			<c:forEach var="i" begin="${map.paging.minPage }" end="${map.paging.maxPage }">
 			
-			<c:if test="${i == paging.pageNumber }">
+			<c:if test="${i == map.paging.pageNumber }">
 			<li class="active"><a>${i }</a></li>
 			</c:if>
-			<c:if test="${i != paging.pageNumber }">
-			<li><a href="./bbs?pageNum=${i }">${i }</a></li>
+			<c:if test="${i != map.paging.pageNumber }">
+			<li><a href="./bbs?pageNumber=${i }">${i }</a></li>
 			</c:if>
 			
 			</c:forEach>
 			
-			<c:if test="${paging.next }">
+			<c:if test="${map.paging.next }">
 			
-			<li><a href="./bbs?pageNum=${paging.forward }"><span class="glyphicon glyphicon-triangle-right"></span></a></li>
+			<li><a href="./bbs?pageNumber=${map.paging.forward }"><span class="glyphicon glyphicon-triangle-right"></span></a></li>
 		
 			</c:if>
 		

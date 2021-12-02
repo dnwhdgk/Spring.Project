@@ -69,26 +69,65 @@
 		VALUES (#{boarder_id}, #{file_name}, #{file_realName}, 0)
 	</insert>
 	
-	<!-- 게시물 불러오기 SQL (id : getBoarder -->
-	<select id="getBoarder" parameterType = "int" resultType="Boarder">
+	<!-- 게시물 불러오기 SQL -->
+	<select id="getBoarder" parameterType="int" resultType="Boarder">
 		SELECT *
 		FROM   BOARDER
 		WHERE  boarder_id = #{boarder_id}
-		AND	   available = 0
+		AND    available  = 0
 	</select>
 	
-	<!-- 첨부파일 불러오기 SQL (id : getUploadFile, 조건 : boarder_id ?) -->
+	<!-- 첨부파일 불러오기 SQL -->
 	<select id="getUploadFile" resultType="UploadFile">
 		SELECT *
 		FROM   UPLOADFILE
 		WHERE  boarder_id = #{boarder_id}
 	</select>
 	
-	<!-- 첨부파일 불러오기 SQL (id : getUploadFileReal, 조건 : file_realName ?) -->
+	<!-- 첨부파일 불러오기 SQL -->
 	<select id="getUploadFileReal" resultType="UploadFile">
 		SELECT *
 		FROM   UPLOADFILE
 		WHERE  file_realName = #{file_realName}
 	</select>
+	
+	<!-- 게시물 수정 SQL -->
+	<update id="updateBoarder">
+		UPDATE BOARDER
+		SET    title = #{title}, contents = #{contents}
+		WHERE  boarder_id = #{boarder_id}
+	</update>
+	
+	<!-- 업로드 파일 수정 SQL -->
+	<update id="updateFile">
+		UPDATE UPLOADFILE
+		SET    file_name = #{file_name}, file_realName = #{file_realName}
+		WHERE  boarder_id = #{boarder_id}
+	</update>
+	
+	<!-- 게시글 최대값 검색 SQL -->
+	<select id="getMaxBoarder_id" resultType ="_int">
+		SELECT  IFNULL(MAX(boarder_id),0)
+		FROM	BOARDER
+		
+	</select>
+	
+	<!-- 게시글 리스트 10개 검색 SQL -->
+	<select id="getBbsList" resultType ="Boarder">
+		SELECT  *
+		FROM BOARDER
+		WHERE boarder_id <![CDATA[<=]]> #{boarder_id}
+		AND	available = 0
+		ORDER BY boarder_id DESC
+		LIMIT 10
+	</select>
+	
+	<!-- 게시글 삭제 처리 SQL -->
+	<update id="deleteBoarder">
+		UPDATE BOARDER
+		SET		available = 1
+		WHERE	boarder_id = #{boarder_id}
+	
+	</update>
 	
 </mapper>

@@ -56,7 +56,7 @@
 					<c:if test="${not empty map.uploadFile}">
 					<tr>
 						<td>첨부파일</td>
-						<td><a href="#">${map.uploadFile.file_name }</a></td>
+						<td><a href="./downloadAction?boarder_id=${map.uploadFile.boarder_id }&file_realName=${map.uploadFile.file_realName }">${map.uploadFile.file_name }</a></td>
 					</tr>
 					</c:if>
 				</tbody>
