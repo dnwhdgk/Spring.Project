@@ -43,6 +43,7 @@ public class BbsController {
 		// 로그인 되있으면 글쓰기 페이지 출력
 		return "bbs/write";
 		
+		
 	}
 	
 	// url 패턴이 'path/bbs/view' 일 경우
